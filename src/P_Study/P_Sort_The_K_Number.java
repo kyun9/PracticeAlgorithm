@@ -22,15 +22,11 @@ class Solution_1 {
 		int size = commands.length;
 		answer = new int[size];
 		while (size > i) {
-			if (commands[i][0] == commands[i][1]) {
-				answer[i] = array[commands[i][0] - 1];
-			} else {
-				for (int k = commands[i][0] - 1; k < commands[i][1]; k++) {
-					al.add(array[k]);
-				}
-				Collections.sort(al);
-				answer[i] = al.get(commands[i][2] - 1);
+			for (int k = commands[i][0] - 1; k < commands[i][1]; k++) {
+				al.add(array[k]);
 			}
+			Collections.sort(al);
+			answer[i] = al.get(commands[i][2] - 1);
 			i++;
 			al.clear();
 		}
