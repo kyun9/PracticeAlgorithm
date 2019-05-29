@@ -12,7 +12,7 @@ public class P_Hash_Marathon {
 		System.out.println(solution(new String[] { "leo", "kiki", "eden" }, new String[] { "eden", "kiki" }));
 	}
 
-
+	//내풀이 다시 확인 필요
 	public static String solution(String[] participant, String[] completion) {
 	      String answer = "";
 	      HashMap<Integer, String> hm = new HashMap<>();
