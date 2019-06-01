@@ -30,7 +30,7 @@ public class P_Queue_Printer_1 {
 		for (int i = 0; i < priorities.length; i++) {
 			ll.add(new Print(i, priorities[i]));
 		}
-		
+
 		Print first = null;
 		boolean b = false;
 		ArrayList<Integer> idx = new ArrayList<>();
