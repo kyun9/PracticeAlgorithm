@@ -12,7 +12,7 @@ public class P_Hash_Marathon {
 		System.out.println(solution(new String[] { "leo", "kiki", "eden" }, new String[] { "eden", "kiki" }));
 	}
 
-	//��Ǯ�� �ٽ� Ȯ�� �ʿ�
+	//³»Ç®ÀÌ ´Ù½Ã È®ÀÎ ÇÊ¿ä
 	public static String solution(String[] participant, String[] completion) {
 	      String answer = "";
 	      HashMap<Integer, String> hm = new HashMap<>();
@@ -25,7 +25,7 @@ public class P_Hash_Marathon {
 	      Set<Integer> keyset = hm.keySet();
 	      for (int i = 0; i < completion.length; i++) {
 	         for ( int key :keyset ) {
-	            if (hm.get(key) == completion[i]) {
+	            if (hm.get(key) == completion[i]) {        //*********(hm.get(key).equals(completion[i])*********** 이걸로 변경
 	               hm.remove(key);
 	               break;
 	            }
