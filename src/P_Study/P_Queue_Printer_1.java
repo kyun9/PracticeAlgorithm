@@ -20,8 +20,6 @@ public class P_Queue_Printer_1 {
 		int[] priorities = new int[] { 1, 1, 9, 1, 1, 1 };
 		int location = 0;
 		System.out.println(solution(priorities, location));
-		// return 1이 나와야함
-
 	}
 
 	public static int solution(int[] priorities, int location) {
@@ -36,8 +34,8 @@ public class P_Queue_Printer_1 {
 		Print first = null;
 		boolean b = false;
 		ArrayList<Integer> idx = new ArrayList<>();
-		
-		while (ll.size()>0) {
+
+		while (!ll.isEmpty()) {
 			first = ll.peek();
 			for (int i = 1; i < ll.size(); i++) {
 				if (first.prior < ll.get(i).prior) {
@@ -48,18 +46,20 @@ public class P_Queue_Printer_1 {
 			if (b) {
 				ll.removeFirst();
 				ll.add(first);
+
 			} else {
-				idx.add(first.num+1);
+				idx.add(first.num + 1);
 				ll.removeFirst();
 			}
-			
-			b=false;
+
+			b = false;
 		}
 
-		System.out.println(idx);
-		
-		answer=idx.get(location);
-		
+		for (int i = 0; i < idx.size(); i++) {
+			if (idx.get(i) == location + 1) {
+				answer = i + 1;
+			}
+		}
 		return answer;
 	}
 }
