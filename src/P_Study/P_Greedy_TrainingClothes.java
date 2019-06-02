@@ -1,50 +1,52 @@
 package P_Study;
 
 class Solution_2 {
+	
+	//Á¤È®µµ 100
   public int solution(int n, int[] lost, int[] reserve) {
      int answer = 0;
      int[] tmp= new int[n];
 
-     //ì „ë¶€ ì²´ìœ¡ë³µ ìžˆë‹¤ê³ í•˜ê³  1ë¡œ ì´ˆê¸°í™”
+     //ÀüºÎ Ã¼À°º¹ ÀÖ´Ù°íÇÏ°í 1·Î ÃÊ±âÈ­
      for (int i = 0; i < n; i++) {
         tmp[i] = 1;
      }
      
-     //ì²´ìœ¡ë³µ ìžƒì–´ë²„ë¦°  ì‚¬ëžŒ 1ì”© ê°ì†Œ
+     //Ã¼À°º¹ ÀÒ¾î¹ö¸°  »ç¶÷ 1¾¿ °¨¼Ò
      for (int i = 0; i < lost.length; i++) {
         tmp[lost[i] - 1]--;
      }
-     //ì²´ìœ¡ë³µ ì—¬ë¶„ìžˆëŠ” ì‚¬ëžŒ 1ì”© ì¦ê°€
+     //Ã¼À°º¹ ¿©ºÐÀÖ´Â »ç¶÷ 1¾¿ Áõ°¡
      for (int i = 0; i < reserve.length; i++) {
          tmp[reserve[i] - 1]++;
       }
-     // ì—¬ë¶„ìžˆëŠ” ì‚¬ëžŒ ê¸°ì¤€ìœ¼ë¡œ ë°˜ë³µ
+     // ¿©ºÐÀÖ´Â »ç¶÷ ±âÁØÀ¸·Î ¹Ýº¹
 		for (int i = 0; i < reserve.length; i++) {
-			// ì²´ìœ¡ë³µì´ 2ê°œ ìžˆì„ë–„ë§Œ
+			// Ã¼À°º¹ÀÌ 2°³ ÀÖÀ»‹š¸¸
 			if (tmp[reserve[i] - 1] == 2) {
 
-				// ë§¨ ì˜¤ë¥´ìª½ ì¼ë•Œ ì²´ìœ¡ë³µ ì—†ëŠ”ì§€ ì™¼ìª½ë§Œ ê²€ì‚¬
+				// ¸Ç ¿À¸£ÂÊ ÀÏ¶§ Ã¼À°º¹ ¾ø´ÂÁö ¿ÞÂÊ¸¸ °Ë»ç
 				if((reserve[i]-1)==0) {
 			           if(tmp[(reserve[i]-1)+1]==0) {
 			              tmp[(reserve[i]-1)+1]++;
 			              tmp[(reserve[i]-1)]--;
 			           }
 			        }
-				// ë§¨ ì™¼ìª½ ì¼ë•Œ ì²´ìœ¡ë³µ ì—†ëŠ”ì§€ ì˜¤ë¥¸ìª½ë§Œ ê²€ì‚¬
+				// ¸Ç ¿ÞÂÊ ÀÏ¶§ Ã¼À°º¹ ¾ø´ÂÁö ¿À¸¥ÂÊ¸¸ °Ë»ç
 				 else if((reserve[i]-1)==(n-1)) {
 			           if(tmp[(reserve[i]-1)-1]==0) {
 			              tmp[(reserve[i]-1)-1]++;
 			              tmp[(reserve[i]-1)]--;
 			           }
 			        }
-				// ê°€ìš´ë° ìžˆì„ë•Œ
+				// °¡¿îµ¥ ÀÖÀ»¶§
 				else {
-					// ì™¼ìª½ ì²´ìœ¡ë³µ ì—†ëŠ”ì§€ ê²€ì‚¬
+					// ¿ÞÂÊ Ã¼À°º¹ ¾ø´ÂÁö °Ë»ç
 					if (tmp[(reserve[i] - 1) - 1] == 0) {
 						tmp[(reserve[i] - 1) - 1]++;
 						tmp[(reserve[i] - 1)]--;
 					}
-					// ì˜¤ë¥¸ìª½ ì²´ìœ¡ë³µ ì—†ëŠ”ì§€ ê²€ì‚¬
+					// ¿À¸¥ÂÊ Ã¼À°º¹ ¾ø´ÂÁö °Ë»ç
 					else if (tmp[(reserve[i] - 1) + 1] == 0) {
 						tmp[(reserve[i] - 1) + 1]++;
 						tmp[(reserve[i] - 1)]--;
@@ -85,7 +87,8 @@ public class P_Greedy_TrainingClothes {
    }
 
 }
-//ì •ë‹µìž í’€ì´
+//Á¤´äÀÚ Ç®ÀÌ
+/// Á¤È®µµ 91ÇÁ·Î
 //class Solution {
 //    public int solution(int n, int[] lost, int[] reserve) {
 //        int answer = 0;
@@ -108,7 +111,7 @@ public class P_Greedy_TrainingClothes {
 //}
 
 
-//ì˜¤ë‹µ  booleanìœ¼ë¡œ í•´ì„œ true falseë¡œëŠ” ëª»êµ¬í•´ ì™œëƒí•˜ë©´ (3,4 ì´ê³  5,4) ì´ê±°ë‚˜ (2,3 ì´ê³  1,2)ì¸ê±¸ ëª»êµ¬í•´
+//¿À´ä  booleanÀ¸·Î ÇØ¼­ true false·Î´Â ¸ø±¸ÇØ ¿Ö³ÄÇÏ¸é (3,4 ÀÌ°í 5,4) ÀÌ°Å³ª (2,3 ÀÌ°í 1,2)ÀÎ°É ¸ø±¸ÇØ
 //class Solution_3 {
 //   public int solution(int n, int[] lost, int[] reserve) {
 //      int answer = 0;
@@ -118,7 +121,7 @@ public class P_Greedy_TrainingClothes {
 //         b[i] = true;
 //      }
 //      
-//      System.out.println("ì²˜ìŒ boolean ë°°ì—´ true ì´ˆê¸°í™”");
+//      System.out.println("Ã³À½ boolean ¹è¿­ true ÃÊ±âÈ­");
 //      for(int i=0;i<b.length;i++) {
 //         System.out.print(b[i] + " ");
 //      }
@@ -130,7 +133,7 @@ public class P_Greedy_TrainingClothes {
 //      }
 //      
 //      System.out.println();
-//      System.out.println("ì²˜ìŒ boolean ë°°ì—´ lostë¥¼ falseë³€í™˜");
+//      System.out.println("Ã³À½ boolean ¹è¿­ lost¸¦ falseº¯È¯");
 //      for(boolean i:b) {
 //         System.out.print(i + " ");
 //      }
@@ -140,7 +143,7 @@ public class P_Greedy_TrainingClothes {
 //      for(int i=0;i<reserve.length;i++) {
 //    	 if(b[reserve[i]-1]==false) {
 //    		  b[reserve[i]-1]= true;
-//    		  System.out.println("ê³¼ì •1");
+//    		  System.out.println("°úÁ¤1");
 //    		  for(boolean a:b) {
 //    		         System.out.print(a + " ");
 //    		      }
@@ -149,7 +152,7 @@ public class P_Greedy_TrainingClothes {
 //    	 else if((reserve[i]-1)==0) {
 //            if(b[(reserve[i]-1)+1]==false) {
 //               b[(reserve[i]-1)+1]=true;
-//               System.out.println("ê³¼ì •2");
+//               System.out.println("°úÁ¤2");
 //     		  for(boolean a:b) {
 //     		         System.out.print(a + " ");
 //     		      }
@@ -159,7 +162,7 @@ public class P_Greedy_TrainingClothes {
 //    	 else if((reserve[i]-1)==(n-1)) {
 //            if(b[(reserve[i]-1)-1]==false) {
 //               b[(reserve[i]-1)-1]=true;
-//               System.out.println("ê³¼ì •3");
+//               System.out.println("°úÁ¤3");
 //     		  for(boolean a:b) {
 //     		         System.out.print(a + " ");
 //     		      }
@@ -169,7 +172,7 @@ public class P_Greedy_TrainingClothes {
 //         else {
 //            if(b[(reserve[i]-1)-1]==false) {
 //               b[(reserve[i]-1)-1]=true;
-//               System.out.println("ê³¼ì •4");
+//               System.out.println("°úÁ¤4");
 //     		  for(boolean a:b) {
 //     		         System.out.print(a + " ");
 //     		      }
@@ -177,7 +180,7 @@ public class P_Greedy_TrainingClothes {
 //            }
 //            else if(b[(reserve[i]-1)+1]==false) {
 //               b[(reserve[i]-1)+1]=true;
-//               System.out.println("ê³¼ì •5");
+//               System.out.println("°úÁ¤5");
 //     		  for(boolean a:b) {
 //     		         System.out.print(a + " ");
 //     		      }
