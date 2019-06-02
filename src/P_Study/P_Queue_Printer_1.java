@@ -36,7 +36,9 @@ public class P_Queue_Printer_1 {
 		ArrayList<Integer> idx = new ArrayList<>();
 
 		while (!ll.isEmpty()) {
+			b = false;
 			first = ll.peek();
+			
 			for (int i = 1; i < ll.size(); i++) {
 				if (first.prior < ll.get(i).prior) {
 					b = true;
@@ -52,7 +54,6 @@ public class P_Queue_Printer_1 {
 				ll.removeFirst();
 			}
 
-			b = false;
 		}
 
 		for (int i = 0; i < idx.size(); i++) {
