@@ -1,32 +1,33 @@
 package B_Collections;
 
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Scanner;
-
 public class B_1927 {
 
 	public static void main(String[] args) {
+		PriorityQueue<Integer> qu = new PriorityQueue<>();
 		Scanner sc = new Scanner(System.in);
+		
 		int size = sc.nextInt();
 		int num=0;
-		LinkedList<Integer> list = new LinkedList<>();
 		
-		while(size>0) {
-			num =sc.nextInt();
-			
+		while(size -- >0) {
+			num = sc.nextInt();
 			if(num ==0) {
-				Collections.sort(list);
-				System.out.println(list.poll());
+				if(qu.isEmpty()) {
+					System.out.println(0);
+				}
+				else {
+					System.out.println(qu.poll());
+				}
 			}
-			else {
-				list.add(num);
-			}
-			
-			
-			size--;
+			else
+				qu.offer(num);
 		}
+		
 		sc.close();
+		
+		
 	}
 
 }
