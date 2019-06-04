@@ -1,32 +1,26 @@
 package P_Study;
 
-import java.util.LinkedList;
 
 
 
-class Solution {
+class Solution1 {
     public String solution(int[] numbers) {
         String answer = "";
         
         
         
-        LinkedList<Integer> list = new LinkedList<>();
-        for(int i=0;i<numbers.length;i++) {
-        	list.add(numbers[i]);
-        }
-        
-        int first=0;
-       while(true) {
-    	   first = list.peek();
-    	   
-       }
         
         return answer;
     }
     
-    LinkedList<Integer> cycle(LinkedList<Integer> ll) {
-    	LinkedList<Integer> ll1 = new LinkedList<>();
-    	return ll1;
+    int[] swap(int[] arr, int first, int second) {
+    	int tmp=0;
+    	
+    	tmp =arr[first];
+    	arr[first]=arr[second];
+    	arr[second]=tmp;
+    	
+    	return arr;
     }
     
 }
