@@ -8,7 +8,7 @@ class Solution1 {
         String answer = "";
         
         
-        
+        //순열 
         
         return answer;
     }
