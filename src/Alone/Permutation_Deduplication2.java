@@ -22,14 +22,15 @@ class Permutation_2{
 	//재귀함수를 써서 순열을 뽑아 낼꺼야.
 	
 //	깊이를 증가시킬 depth를 없앴 수가 없어
-	void perm(int depth) {
-		if(depth==n) {								//재귀를 빠져나갈 조건이야.
-			System.out.println(Arrays.toString(res)); // 빠져나가면서 출력해죠
+	void perm(int depth) {					//depth는 res의 크기를 의미해 //재귀를 하면서 인덱스 증가
+		if(depth==n) {								
+			System.out.println(Arrays.toString(res)); 
 			return;
 		}
 		
-		for(int i=0;i<n-depth;i++) {			// n-depth를 두어서 순열에서 뽑아낼 만큼만 정의
-			res[depth]=list.remove(i);			//앞에 원소를 기준으로 뽑아내고 list에서 제거
+		for(int i=0;i<n-depth;i++) {	// n-depth를 하는이유가 list를 remove하니까 당연히 크기를 줄여주고
+										// add해줄떄는 재귀를 통해 크기가 유지되니까
+			res[depth]=list.remove(i);			//앞에 원소를 기준으로 뽑아내고 list에서 제거(중복제거)
 			perm(depth+1);					// 재귀함수 여기서 depth를 올려주어 재귀
 												// 두번째 원소 , 세번쨰 원소 ... 정하는거
 			list.add(i,res[depth]);				//재귀를 return하면서 제거한 list의 값을 다시 넣어준다.
@@ -44,7 +45,7 @@ class Permutation_2{
 public class Permutation_Deduplication2 {
 	// 중복 없는 순열 만드는 법이야.
 	public static void main(String[] args) {
-		int[] arr = { 1, 2, 3 ,4};
+		int[] arr = { 1, 2, 3};
 
 		Permutation_2 main = new Permutation_2(arr);  
 														
