@@ -1,32 +1,38 @@
 package P_Study;
 
+import java.util.Arrays;
+import java.util.Comparator;
 
-
-
-class Solution1 {
-    public String solution(int[] numbers) {
-        String answer = "";
-        
-        
-        //순열 
-        
-        return answer;
-    }
-    
-    int[] swap(int[] arr, int first, int second) {
-    	int tmp=0;
-    	
-    	tmp =arr[first];
-    	arr[first]=arr[second];
-    	arr[second]=tmp;
-    	
-    	return arr;
-    }
-    
-}
 public class P_Sort_TheGreatestNumber {
 	public static void main(String[] args) {
-		
+		System.out.println(solution(new int[] {6, 10, 2}));
 	}
-	
+	 public static String solution(int[] numbers) {
+	        String answer = "";
+	        int size = numbers.length;
+	        String[] tmp = new String[size];
+	        
+	        for(int i=0;i<size;i++) {
+	        	tmp[i]=String.valueOf(numbers[i]);
+	        }
+	        
+	        Arrays.sort(tmp, new Comparator<String>() {
+
+				@Override
+				public int compare(String o1, String o2) {
+					return (o2+o1).compareTo(o1+o2);
+				}
+	        	
+	        });
+	        
+	        if(tmp[0].equals("0"))
+	        	answer = "0";
+	        else {
+	        	for(String a : tmp)
+	        		answer += a;	        
+	        }
+	        
+	        
+	        return answer;
+	    }
 }
