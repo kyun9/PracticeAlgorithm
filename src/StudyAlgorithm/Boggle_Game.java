@@ -46,7 +46,7 @@ public class Boggle_Game {
 					}
 				}
 			}
-			return false;
+			return false; //이 부분 이상해
 		}
 	}
 }
