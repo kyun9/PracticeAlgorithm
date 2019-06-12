@@ -42,6 +42,7 @@ public class Boggle_Game {
 				b=y+yarr[i];
 				if((a>=0&&a<=4)&&(b>=0&&b<=4)) {
 					if(tmp[depth]==arr[a][b]) {
+						System.out.println(a+" "+b);
 						allSearch(tmp,a,b,arr,depth+1); //Àç±ÍÈ£Ãâ
 					}
 				}
