@@ -23,11 +23,14 @@ public class Boggle_Game {
    //target 첫번재 요소 탐색
    static void firstWord(char[][] arr, String target) {
       char[] targetArr = target.toCharArray();
-      for(int i=0;i<arr.length;i++) {
+      b:for(int i=0;i<arr.length;i++) {
          for(int j=0;j<arr[0].length;j++) {
             if(targetArr[0]==arr[i][j]) {
                qu.add(arr[i][j]);
                depthSearch(targetArr,i,j,arr,1);   //allSearch 호출 //여기 여러개의 함수호출되고 false일수 잇어
+               if(flag) {
+            	   break b;
+               }
             }
          }
       }
