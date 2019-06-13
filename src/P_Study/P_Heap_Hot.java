@@ -10,25 +10,25 @@ public class P_Heap_Hot {
 		
 		System.out.println(solution(scoville, k));
 	}
-	public static int solution(int[] scoville, int k) {
+	public static int solution(int[] scoville, int K) {
         int answer = 0;
         PriorityQueue<Integer> qu = new PriorityQueue<>();
         
         for(int val : scoville)
-        	qu.add(val);
+        	qu.offer(val);
         
         int first=0,second=0;
         int cnt =0;
         	
         
-        while(first<=k) {
+        while(qu.peek()<=K) {
         	first= qu.poll();
         	second =qu.poll();
         	
-        	qu.add(first+second*2);
-        	first =qu.peek();
+        	qu.offer(first+second*2);
         	cnt++;
         }
+        
         answer =cnt;
         
         return answer;
