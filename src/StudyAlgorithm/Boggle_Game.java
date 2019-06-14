@@ -15,7 +15,7 @@ public class Boggle_Game {
             { 'L', 'E', 'M', 'O', 'E' },
             { 'U', 'F', 'M', 'O', 'A' },
             { 'S', 'O', 'I', 'T', 'U' } };
-      String target = "OMO";
+      String target = "TWICE";
       firstWord(arr,target);  //firstSearch »£√‚
       System.out.println(flag);
    }
