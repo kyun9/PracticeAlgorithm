@@ -1,66 +1,90 @@
 package P_Study;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class P_BFS_Network {
-
 	public static void main(String[] args) {
-		int n=3;
+		int n=4;
 	//	int[][] computer= {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
-		int[][] computer= {{1, 1, 0}, {1, 1, 1}, {0, 1, 1}};
+	//	int[][] computer= {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+	//	int[][] computer= {{1, 1, 0}, {1, 1, 1}, {0, 1, 1}};
+		int[][] computer= {{1, 1, 1,1}, {1, 1, 1,1}, {1, 1, 1,1}};
 		solution(n,computer);
 	}
 	public static int solution(int n, int[][] computers) {
         int answer = 0;
-        LinkedList<Integer> comp= new LinkedList<>();
-        LinkedList<Integer> list = new LinkedList<>();
-        Boolean[] b = new Boolean[n];
-        for(int i=0;i<b.length;i++) {
-        	b[i]=false;
-        }
-        int count=0;
-        int a=0;
-        for(int i=a;i<n;i++) {
-        	b[i]=true;
-        	System.out.println("i"+i);
-        	for(int j=0;j<n;j++) {
+        
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>(); 
+        
+        int size=0;
+        for(int i=0;i<n;i++) {
+        	for(int j=i+1;j<n;j++) {
         		if(computers[i][j]==1) {
-        			if(i!=j) {
-        				if(!comp.isEmpty()) {
-        					if(!comp.contains(new Integer(j))) {
-        						list.add(j);
-        						
-        					}
-        				}else {
-        					list.add(j);
-        				}
-        			}
-	        				
+        			list.add( new ArrayList<>() );
+        			list.get(size).add(i);
+        			list.get(size).add(j);
+        			size++;
         		}
         	}
-        	System.out.println("list"+list);
-        	if(!list.isEmpty()) {
-        		comp.add(i);
-        		a=list.removeFirst();
-        	}
-        	else {
-        		count++;
-        		comp.clear();
-        		for(int k=0;k<b.length;k++) {
-        			if(b[k]==false) {
-        				a=k;
-        				break;
-        			}
-        		}
-        	}
-        	System.out.println("comp"+comp);
-        	System.out.println("list"+list);
-        	System.out.println(count);
-        	System.out.println("0000000000");
         }
         
-        answer=count;
+        
+        if(list.isEmpty()) {
+        	answer=n;
+        }
+        else if(list.size()==1) {
+        	answer=n-1;
+        }
+        else {
+        	LinkedList<Integer> qu = new LinkedList<>();
+        	int num=-1;
+        	int first=-1;
+        	int last=-1;
+        	while(num++<list.size()) {
+        		if(first==list.get(num).get(0)) {
+        			continue;
+        		}
+        		else {
+        			first=list.get(num).get(0);
+        			last=list.get(num).get(1);
+        			qu.add(first);
+        			qu.add(last);
+        			
+//        			for(int i=0;i<list.size();i++) {
+//        				if(last==list.get(i).get(0)) {
+//        					last=list.get(i).get(1);
+//        					qu.add(last);
+//        				}
+//        			}                                --->이부분 dfs로 들어가야겠다
+        			System.out.println(qu);
+        			if(qu.size()==n) {
+            			answer=1;
+            			break;
+            		}
+        			else {
+        				answer++;
+        				qu.clear();
+        			}
+        		}
+        	}
+        }
+        
+        
+        
+        
+        for (int i = 0 ; i < list.size() ; i++) { 
+            for (int j = 0 ; j < list.get(i).size() ; j++) { 
+              System.out.print(list.get(i).get(j) + " "); 
+           } 
+           System.out.println(); 
+        } 
+        System.out.println("----------------");
+        
+        System.out.println(answer);
         return answer;
     }
+	
+	
 
 }
