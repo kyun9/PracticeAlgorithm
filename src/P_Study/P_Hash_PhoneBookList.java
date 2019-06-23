@@ -1,6 +1,5 @@
 package P_Study;
 
-import java.util.HashSet;
 
 public class P_Hash_PhoneBookList {
 
@@ -12,21 +11,12 @@ public class P_Hash_PhoneBookList {
 	}
 
 	public static boolean solution(String[] phone_book) {
-		boolean answer = true;
-		HashSet<String> hash = new HashSet<>();
-
-		for (String a : phone_book) {
-			hash.add(a);
-		}
-
-		for (String hnum : hash) {
-			for (String arr : phone_book) {
-				if(hnum.startsWith(arr)&&!arr.equals(hnum)) {
-					return false;
-				}
-			}
-		}
-
-		return answer;
+		 for(int i=0; i<phone_book.length-1; i++) {
+	            for(int j=i+1; j<phone_book.length; j++) {
+	                if(phone_book[i].startsWith(phone_book[j])) {return false;}
+	                if(phone_book[j].startsWith(phone_book[i])) {return false;}
+	            }
+	        }
+	        return true;
 	}
 }
