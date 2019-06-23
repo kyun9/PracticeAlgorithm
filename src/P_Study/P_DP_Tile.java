@@ -29,7 +29,6 @@ public class P_DP_Tile {
 		long y=1;
 		
 		if(N==1) {
-			answer =4;
 		}
 		else{
 			for(int i=1;i<N;i++) {
