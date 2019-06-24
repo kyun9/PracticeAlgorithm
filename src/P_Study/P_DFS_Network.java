@@ -25,13 +25,13 @@ public class P_DFS_Network {
 		System.out.println(answer);
 		return answer;
     }
-   public static void dfs(int[][] a, boolean[] c, int v) {
-		int n = a.length - 1;
-		c[v] = true;
-		System.out.print(v + " ");
-		for (int i = 1; i <= n; i++) {
-			if (a[v][i] == 1 && !c[i]) {
-				dfs(a, c, i);
+   public static void dfs(int[][] computers, boolean[] check, int i) {
+		int n = computers.length - 1;
+		check[i] = true;
+		System.out.print(i + " ");
+		for (int k = 1; k <= n; k++) {
+			if (computers[i][k] == 1 && !check[k]) {
+				dfs(computers, check, k);
 			}
 		}
 	}
