@@ -13,35 +13,34 @@ public class P_DFS_WordConversion {
 	public static int solution(String begin, String target, String[] words) {
         int answer = 0;
         
-        boolean[] check=new boolean[words.length];
-       dfs(begin,target,words,0,check);
+        
+       dfs(begin,target,words,0,0);
         
        answer=dcnt;
         return answer;
     }
 	
-	public static void dfs(String begin, String target, String[] words,int dept,boolean[] check){
-		int cnt=0;
+	public static void dfs(String begin, String target, String[] words,int start,int dept){
 		char[] beginArr = begin.toCharArray();
-		for(int i=0;i<words.length;i++) {
-			if(check[i]) continue;
-			char[] wordsArr=words[i].toCharArray();
-			for(int j=0;j<wordsArr.length;j++) {
-				if(beginArr[j]!=wordsArr[j]) {
+		
+		for(int i=start;i<words.length;i++) {
+			int cnt=0;
+			char[] wordArr=words[i].toCharArray();
+			for(int j=0;j<wordArr.length;j++) {
+				if(beginArr[j]!=wordArr[j]) {
 					cnt++;
 				}
 			}
-																									System.out.println("dept : "+dept+ " i : "+i+" cnt : " +cnt + " dcnt : "+dcnt);
-			check[i]=true;
-			if(words[i]==target) {
+			System.out.println("dept : "+dept+ " i : "+i+" cnt : " +cnt + " dcnt : "+dcnt);
+			if(begin.equals(target)) {
 				dcnt=dept+1;
 				return;
 			}
 			else if(cnt==1) {
+				start++;
 				dept++;
-				dfs(String.valueOf(wordsArr),target,words,dept,check);
+				dfs(String.valueOf(wordArr),target,words,start,dept);
 			}
-			cnt=0;
 		}
 	}
 }
