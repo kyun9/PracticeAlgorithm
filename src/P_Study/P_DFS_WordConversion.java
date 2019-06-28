@@ -9,47 +9,56 @@ public class P_DFS_WordConversion {
 		String begin= "hit";
 		String target = "cog";
 		String[] words= {"hot", "dot", "dog", "lot", "log", "cog"};
-		
 		System.out.println(solution(begin,target,words));
 	}
+	static int find;
 	public static int solution(String begin, String target, String[] words) {
 		int answer = 0;
 		 
         List<String> list = new ArrayList<String>();
-        for(int i=0;i<words.length;i++){
-            list.add(words[i]);
-        }
         
-        answer = dfs(begin,target,list,0);
+        for(String s: words)
+            list.add(s);
+        
+        if(!list.contains(target))
+        	answer=0;
+        else
+        	dfs(begin,target,list,0);
+        
+       answer=find; 
+       
         return answer;
     }
 	
-	public static int dfs(String begin, String target, List<String> list,int dept){
+	public static void dfs(String begin, String target, List<String> list,int depth){
 		char[] beginArr = begin.toCharArray();
 		char[] targetArr = target.toCharArray();
+		
+		
 		for(int i=0;i<list.size();i++) {
 			int cnt=0;
 			int tcnt = 0;
 			char[] wordArr=list.get(i).toCharArray();
 			for(int j=0;j<wordArr.length;j++) {
+				if(beginArr[j]!=targetArr[j]){
+					tcnt++;
+				}
 				if(beginArr[j]!=wordArr[j]) {
 					cnt++;
 				}
-				if(beginArr[j]!=targetArr[j]){
-					tcnt++;
-                }
 			}
+	
 			if(tcnt==1){
-				dept++;
-                return dept;
+				find = depth+1;
+                return;
             }
-			if(cnt==1) {
-				begin = list.get(i);
-				dept++;
+			else if(cnt==1) {
+				beginArr = wordArr;
+				depth++;
                 list.remove(i);
-				return dfs(begin,target,list,dept);
+				dfs(String.valueOf(beginArr),target,list,depth);
+				return;
 			}
 		}
-		return 0;
 	}
 }
