@@ -11,7 +11,7 @@ public class P_DFS_WordConversion {
 		String[] words= {"hot", "dot", "dog", "lot", "log", "cog"};
 		System.out.println(solution(begin,target,words));
 	}
-	static int find;
+	static int find=0;
 	public static int solution(String begin, String target, String[] words) {
 		int answer = 0;
 		 
@@ -20,9 +20,7 @@ public class P_DFS_WordConversion {
         for(String s: words)
             list.add(s);
         
-        if(!list.contains(target))
-        	answer=0;
-        else
+        if(list.contains(target))
         	dfs(begin,target,list,0);
         
        answer=find; 
