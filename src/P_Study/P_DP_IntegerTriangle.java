@@ -7,7 +7,7 @@ public class P_DP_IntegerTriangle {
 
 	public static void main(String[] args) {
 		int[][] triangle = { { 7 }, { 3, 8 }, { 8, 1, 0 }, { 2, 7, 4, 4 }, { 4, 5, 2, 6, 5 } };
-		System.out.println(solution1(triangle));
+		System.out.println(solution2(triangle));
 
 	}
 
@@ -69,11 +69,9 @@ public class P_DP_IntegerTriangle {
 
 		for (int i = triangle.length - 1; i > 0; i--) {
 			for (int j = 0; j < i; j++) {
-				if (list.get(j) > list.get(j + 1))
-					list.set(j, list.get(j) + triangle[i - 1][j]);
-				else
-					list.set(j, list.get(j + 1) + triangle[i - 1][j]);
+					list.set(j, Math.max(list.get(j), list.get(j+1)) + triangle[i - 1][j]);
 			}
+			list.remove(list.size()-1);
 		}
 		answer = list.get(0);
 		return answer;
@@ -82,6 +80,7 @@ public class P_DP_IntegerTriangle {
 
 //===========================================================================================
 	/* 다른 사람 풀이 */
+	
 	public int solution3(int[][] triangle) {
 		// 1. 기본값 초기화 //
 		int[][] dp = new int[triangle.length][triangle.length];
