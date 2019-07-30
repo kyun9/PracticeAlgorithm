@@ -1,11 +1,11 @@
 package P_Study;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class P_Stack_Truck {
 	public static void main(String[] args) {
 		System.out.println(solution(2, 10, new int[] { 7, 4, 5, 6 }));
+//		System.out.println(solution(100, 100, new int[] {10}));
 	}
 	public static int solution(int bridge_length, int weight, int[] truck_weights) {
 		 int answer = 0;
@@ -20,6 +20,13 @@ public class P_Stack_Truck {
 
 	      int sum = 0;
 	      while (!list.isEmpty()) {
+	    	  if(!bl.isEmpty()) {
+	    		  if(bl.get(0)>bridge_length) {
+	    			  sum-=passing.get(0);
+	    			  passed.add(passing.remove(0));
+	    			  bl.remove(0);
+	    		  }
+	    	  }
 	    	  if (!passing.isEmpty()) {
 	            if ((sum + list.get(0) > weight)) {
 	            } else {
@@ -34,15 +41,16 @@ public class P_Stack_Truck {
 	         }
 	         time++;
 	         for(int i=0;i<bl.size();i++) {
-	        	bl.add(bl.get(i)+1);
-	         }
-	         if(bl.get(0)>bridge_length) {
-	        	 sum-=passing.get(0);
-	        	 passed.add(passing.remove(0));
-	        	 bl.remove(0);
+	        	 bl.set(i, bl.get(i)+1);
 	         }
 	      }
-	      
+	      int last =bl.get(0);
+	      while(last++<bridge_length) {
+	    	  time++;
+	      }
+	      System.out.println(time);
+	      System.out.println(last);
+	      answer=time;
 	      return answer;
 
 	}
