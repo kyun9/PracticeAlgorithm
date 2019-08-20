@@ -19,13 +19,13 @@ public class P_CSearch_Decimal {
 			result = new int[i];
 			perm(num, i, 0, result, hash);
 		}
+		answer=hash.size();
 		return answer;
 	}
 
 	static void perm(int[] num, int r, int depth, int[] result, HashSet<Integer> hash) {
 		if (depth == r) {
 			print(result, hash);
-			findDecimal(hash);
 			return;
 		}
 		for (int i = depth; i < num.length; i++) {
@@ -47,23 +47,19 @@ public class P_CSearch_Decimal {
 		for (int i : result) {
 			sb.append(i);
 		}
-		hash.add(Integer.valueOf(sb.toString()));
+		int value=Integer.valueOf(sb.toString());
+		findDecimal(value,hash);
 	}
 
-	static void findDecimal(HashSet<Integer> hash) {
-		System.out.println(hash);
-		for (int i : hash) {
-			int size = (int) (Math.sqrt(i));
-			if (size == 1) {
-				hash.remove(i);
+	static void findDecimal(int value,HashSet<Integer> hash) {
+			int v = (int) (Math.sqrt(value));
+			if (v == 1) {
+				return;
 			} else {
-				for (int a = 2; a <= size; a++) {
-					if(i%a==0) {
-						hash.remove(i);
-					}
-				}
+				for (int i = 2; i <= v; i++) 
+					if(value%i==0) return;
+				hash.add(value);
 			}
-		}
 	}
 
 }
