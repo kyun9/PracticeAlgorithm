@@ -19,7 +19,7 @@ public class P_CSearch_Decimal {
 			result = new int[i];
 			perm(num, i, 0, result, hash);
 		}
-		answer=hash.size();
+		answer = hash.size();
 		return answer;
 	}
 
@@ -47,19 +47,23 @@ public class P_CSearch_Decimal {
 		for (int i : result) {
 			sb.append(i);
 		}
-		int value=Integer.valueOf(sb.toString());
-		findDecimal(value,hash);
+		int value = Integer.valueOf(sb.toString());
+		findDecimal(value, hash);
 	}
 
-	static void findDecimal(int value,HashSet<Integer> hash) {
-			int v = (int) (Math.sqrt(value));
-			if (v == 1) {
+	static void findDecimal(int value, HashSet<Integer> hash) {
+		if (value == 0 || value == 1)
+			return;
+		else if (value == 2 || value == 3) {
+			hash.add(value);
+			return;
+		}
+		int v = (int) (Math.sqrt(value));
+		for (int i = 2; i <= v; i++) {
+			if (value % i == 0)
 				return;
-			} else {
-				for (int i = 2; i <= v; i++) 
-					if(value%i==0) return;
-				hash.add(value);
-			}
+		}
+		hash.add(value);
 	}
 
 }
