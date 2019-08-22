@@ -8,7 +8,7 @@ public class Permutation {
       for(int i=1; i<arr.length+1;i++) {
          int[] result=new int[i];
          perm(arr,i,0,result);
-      }
+      } 
    }
 
    static void perm(int[] arr, int r, int depth, int[] result) {
