@@ -12,7 +12,7 @@
 
 * P = [프로그래머스](https://programmers.co.kr/)
 
-* [소스보기](./src)
+* [나의 소스풀이](./src)
 
 
 
