@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 
-public class P_DFS_TravelRoute {
+public class P_DFS_TravelRoute_mycode {
 	static boolean[][] check;
 	public static void main(String[] args) {
 		String[][] tickets = { { "ICN", "COO" }, { "COO", "ICN" },{ "COO", "ICN" } }; 
