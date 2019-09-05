@@ -20,14 +20,6 @@ public class kakao2017_ColoringBook {
 		int numberOfArea = 0;
 		int maxSizeOfOneArea = 0;
 
-		int size = 0;
-		for (int i = 0; i < picture.length; i++) {
-			for (int j = 0; j < picture[i].length; j++) {
-				if (size < picture[i][j]) {
-					size = picture[i][j];
-				}
-			}
-		}
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		visited = new boolean[picture.length][picture[0].length];
