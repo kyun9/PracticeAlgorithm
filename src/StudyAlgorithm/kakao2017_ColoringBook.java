@@ -10,10 +10,10 @@ public class kakao2017_ColoringBook {
 	static int[] dy = { 0, -1, 1, 0 };
 
 	public static void main(String[] args) {
-//		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 },
-//				{ 0, 0, 0, 1 }, { 0, 0, 0, 1 } }));
-		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 2, 2, 0 }, { 1, 0, 0, 1 }, { 0, 0, 0, 1 },
-			{ 0, 0, 0, 3 }, { 0, 0, 0, 3 } }));
+		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 },
+				{ 0, 0, 0, 1 }, { 0, 0, 0, 1 } }));
+//		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 2, 2, 0 }, { 1, 0, 0, 1 }, { 0, 0, 0, 1 },
+//			{ 0, 0, 0, 3 }, { 0, 0, 0, 3 } }));
 	}
 
 	public static int[] solution(int m, int n, int[][] picture) {
