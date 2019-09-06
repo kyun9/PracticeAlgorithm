@@ -10,10 +10,19 @@ public class kakao2017_ColoringBook {
 	static int[] dy = { 0, -1, 1, 0 };
 
 	public static void main(String[] args) {
-		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 },
-				{ 0, 0, 0, 1 }, { 0, 0, 0, 1 } }));
-//		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 2, 2, 0 }, { 1, 0, 0, 1 }, { 0, 0, 0, 1 },
-//			{ 0, 0, 0, 3 }, { 0, 0, 0, 3 } }));
+		//		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 },
+//				{ 0, 0, 0, 1 }, { 0, 0, 0, 1 } }));
+		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 2, 2, 0 }, { 1, 0, 0, 1 }, { 0, 0, 0, 1 },
+			{ 0, 0, 0, 3 }, { 0, 0, 0, 3 } }));
+//		System.out.println(solution(5, 10, new int[][]  { { 1, 1, 1, 0, 0, 0, 0, 1, 1, 1 }, { 1, 1, 1, 1, 0, 0, 1, 1, 1, 1 },
+//	        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 1, 1, 1, 1, 2, 1 }, { 1, 1, 2, 1, 2, 1, 1, 2, 1, 2 } }));
+//		System.out.println(solution(2, 2, new int[][]   { { 1, 2 }, { 1, 1 } })); //p
+//		System.out.println(solution(6, 4, new int[][]  { { 1, 1, 1, 0 }, { 1, 2, 2, 0 }, { 1, 0, 0, 1 }, { 0, 0, 0, 1 }, { 0, 0, 0, 3 },
+//	        { 0, 0, 0, 3 } }));
+//		System.out.println(solution(4, 4, new int[][] {{ 1, 1, 1, 1 }, { 1, 4, 1, 1 }, { 1, 3, 2, 1 }, { 1, 1, 1, 1 }}));
+//		System.out.println(solution(2, 2, new int[][] { { 0, 0 }, { 0, 0 } })); //p
+//		System.out.println(solution(6, 4, new int[][] { { 1, 1, 1, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 1 }, { 0, 0, 0, 1 }, { 3, 3, 3, 1 },
+//	        { 3, 3, 3, 1 } }));
 	}
 
 	public static int[] solution(int m, int n, int[][] picture) {
@@ -24,9 +33,9 @@ public class kakao2017_ColoringBook {
 		
 		visited = new boolean[picture.length][picture[0].length];
 		for (int i = 0; i < picture.length; i++) {
-			cnt=0;
 			for (int j = 0; j < picture[i].length; j++) {
 				if (picture[i][j] != 0 && visited[i][j] == false) {
+					cnt=0;
 					dfs(i, j, m, n,picture[i][j],picture);
 					numberOfArea++;
 					list.add(cnt);
@@ -36,7 +45,9 @@ public class kakao2017_ColoringBook {
 
 		Collections.sort(list);
 		
-		maxSizeOfOneArea=list.get(list.size()-1);
+		if(!list.isEmpty()) {
+			maxSizeOfOneArea=list.get(list.size()-1);
+		}
 		
 		int[] answer = new int[2];
 		answer[0] = numberOfArea;
