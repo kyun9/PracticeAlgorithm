@@ -1,4 +1,4 @@
-package B_Study;
+package Review;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,7 +14,7 @@ class Pair2 {
 	}
 }
 
-public class B_BFS_Tomato_7576 {
+public class B7576 {
 	static final int[] dx = { 0, 0, 1, -1 };
 	static final int[] dy = { -1, 1, 0, 0 };
 
@@ -42,31 +42,28 @@ public class B_BFS_Tomato_7576 {
 			for (int i = 0; i < dx.length; i++) {
 				int px = p.x + dx[i];
 				int py = p.y + dy[i];
-				if (px >= 0 && px < n && py >= 0 && py < m) {
-					if(arr[px][py]==0&&dist[px][py]==-1) {
-						qu.add(new Pair2(px,py));
-						dist[px][py]= dist[p.x][p.y]+1;
+				if (0 <= px && px < n && 0 <= py && py < m) {
+					if (arr[px][py] == 0 && dist[px][py] == -1) {
+						qu.add(new Pair2(px, py));
+						dist[px][py] = dist[p.x][p.y] + 1;
 					}
 				}
 			}
 		}
-		
-		int result=0;
-		lable:for(int i=0;i<n;i++) {
-			for(int j=0;j<m;j++) {
-				if(result<dist[i][j]) {
-					result=dist[i][j];
+
+		int result = 0;
+		label: for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (result < dist[i][j]) {
+					result = dist[i][j];
 				}
-				if(dist[i][j]==-1&&arr[i][j]==0) {
-					result=-1;
-					break lable;
+				if (dist[i][j] == -1 && arr[i][j] == 0) {
+					result = -1;
+					break label;
 				}
 			}
 		}
-		
 		System.out.println(result);
-		
-		
 	}
 
 }
