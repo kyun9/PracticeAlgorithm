@@ -38,6 +38,7 @@ public class B11724 {
 			return;
 		}
 		check[vertex]=true;
+		flag=true;
 		for(int i: list[vertex]) {
 			if(check[i]==false) {
 				dfs(i);
