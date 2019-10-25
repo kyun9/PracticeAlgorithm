@@ -10,32 +10,27 @@ public class PNetwork {
 	}
 
 	static boolean[] visited;
-	static boolean flag;
-	static int count;
 	
 	public static int solution(int n, int[][] computers) {
 		int answer = 0;
 		visited = new boolean[n];
-		for (int i = 0; i < n; i++) {
-			flag = false;
-			dfs(computers, i);
-			if(flag) {
-				count++;
+		for(int i=0;i<computers.length;i++) {
+			if(!visited[i]) {
+				dfs(computers,n,i);
+				answer++;
 			}
 		}
-		answer= count;
 		return answer;
 	}
 
-	static void dfs(int[][] computers, int n) {
-		if (visited[n]) {
+	static void dfs(int[][] computers, int n, int depth) {
+		if(visited[depth]) {
 			return;
 		}
-		visited[n] = true;
-		flag= true;
-		for (int i=0;i<computers[n].length;i++) {
-			if(visited[i]==false&&computers[n][i]!=0) {
-				dfs(computers,i);
+		visited[depth]=true;
+		for(int i=0;i<n;i++) {
+			if(!visited[i]) {
+				dfs(computers,n,i);
 			}
 		}
 	}
