@@ -2,7 +2,7 @@ package StudyAlgorithm;
 
 import java.util.ArrayList;
 
-public class p2019winter_coding {
+public class p2019winter_coding2 {
 	public static void main(String[] args) {
 		System.out.println(solution(4));
 	}
