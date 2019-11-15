@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.Map.*;
 
 
-class Num{
+class Pair{
 	int rel;
 	int gap;
 	
-	Num(int rel, int gap){
+	Pair(int rel, int gap){
 		this.rel=rel;
 		this.gap= gap;
 	}
@@ -21,10 +21,10 @@ public class p2019winter_coding3 {
 	static HashMap<Integer,Integer>[] map;
 	
 	public static void main(String[] args) {
-		System.out.println(
-				solution(new int[][] { { 1, 4, 8, 10 }, { 5, 5, 5, 5 }, { 10, 10, 10, 10 }, { 10, 10, 10, 20 } }, 3));
 //		System.out.println(
-//				solution(new int[][] {{10, 11, 10, 11}, {2, 21, 20, 10}, {1, 20, 21, 11}, {2, 1, 2, 1}}, 1));
+//				solution(new int[][] { { 1, 4, 8, 10 }, { 5, 5, 5, 5 }, { 10, 10, 10, 10 }, { 10, 10, 10, 20 } }, 3));
+		System.out.println(
+				solution(new int[][] {{10, 11, 10, 11}, {2, 21, 20, 10}, {1, 20, 21, 11}, {2, 1, 2, 1}}, 1));
 	}
 
 	public static int solution(int[][] land, int height) {
@@ -68,30 +68,48 @@ public class p2019winter_coding3 {
 					
 			}
 		}
-		int[] sum = new int[cnt+1];
 		
-		for(int i=1;i<cnt+1;i++) {
-			Iterator it = map[i].entrySet().iterator();
-			while(it.hasNext()) {
-				Entry entry =(Entry)it.next();
-				sum[i] += (int) entry.getValue();
-			}
+		for(int i=1;i<map.length;i++) {
+			System.out.println(map[i]);
 		}
 		
-		for(int i:sum) {
+		ArrayList<Integer> resultList = new ArrayList<>();
+		boolean[] resultCheck;
+		ArrayList<Integer> temp = null;
+		int sum;
+		for(int i=1;i<map.length;i++) {
+			temp= new ArrayList<>();
+			resultCheck= new boolean[map.length];
+			sum=0;
+			resultDFS(resultList, temp,resultCheck, i,sum,0,0);
+		}
+		
+		System.out.println("00000000000000000000000000");
+		for(int i: resultList) {
 			System.out.println(i);
 		}
 		
-		int result = 999999;
-		for(int i =1;i<sum.length;i++) {
-			if(result>sum[i]) {
-				result = sum[i];
-			}
-		}
 		
-		answer = result;
 		return answer;
 	}
+	
+	static void resultDFS(ArrayList<Integer> resultList, ArrayList<Integer> temp, boolean[] resultCheck,int start,int sum,int depth,int value) {
+		if(depth==3) {
+			resultList.add(sum);
+		}
+		if(resultCheck[start]) {
+			return;
+		}
+		resultCheck[start]=true;
+		sum += value;
+		Iterator it = map[start].entrySet().iterator();
+		while(it.hasNext()) {
+			Entry entry =(Entry)it.next();
+			resultDFS(resultList, temp,resultCheck, (int) entry.getKey(),sum,depth+1,(int) entry.getValue());
+		}
+	}
+	
+	
 	
 	static void checkDFS(int[][] group, int x, int y,int size, int[][] land) {
 		check[x][y]=true;
