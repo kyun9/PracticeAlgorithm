@@ -3,6 +3,8 @@ package B_Study;
 import java.io.*;
 import java.util.*;
 
+import StudyAlgorithm.*;
+
 class a implements Comparable<a> {
 	int start;
 	int end;
@@ -41,20 +43,22 @@ public class B_MST_1197_Kruskal {
 			parent[i]=i;
 		}
 		
+		pq = new PriorityQueue<a>();
 		for (int i = 0; i < e; i++) {
 			String[] temp = br.readLine().split(" ");
 			pq.add(new a(Integer.valueOf(temp[0]), Integer.valueOf(temp[1]), Integer.valueOf(temp[2])));
 		}
 		
 		
-		for(int i=0;i<pq.size();i++) {
+		for(int i=0;i<e;i++) {
 			a value = pq.poll();
 			if(!isSameParent(value.start,value.end)) {
+				System.out.println(value.weight);
 				result+=value.weight;
 				union(value.start, value.end);
 			}
 		}
-		
+		System.out.println(result);
 	}
 
 	static int find(int n) {
