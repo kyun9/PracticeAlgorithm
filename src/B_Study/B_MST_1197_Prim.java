@@ -45,7 +45,7 @@ class AdjVertex implements Comparable<AdjVertex>{
 
 
 
-public class B_MST_1197 {
+public class B_MST_1197_Prim {
 	static ArrayList<AdjVertex>[] vertexList;
 	static boolean[] visited;
 	static int result;
