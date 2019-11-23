@@ -1,40 +1,61 @@
 package StudyAlgorithm;
 
-import java.util.*;
+import java.util.Stack;
 
 public class kakao2020_1 {
-	static String result;
+	static int pos;
 
 	public static void main(String[] args) {
-		System.out.println(solution("(()())()"));
-//		System.out.println(solution(")("));
+//		System.out.println(solution("(()())()"));
+		System.out.println(solution(")("));
 //		System.out.println(solution("()))((()"));
 	}
 
 	public static String solution(String p) {
-		String answer = "";
+		if (p.isEmpty())
+			return p;
 
-		char[] arr = p.toCharArray();
-		ArrayList<Character> list = new ArrayList<>();
-		for (char c : arr) {
-			list.add(c);
+		boolean correct = isCorrect(p);
+
+		String u = p.substring(0, pos);
+		String v = p.substring(pos, p.length());
+
+		if (correct) {
+			return u + solution(v);
 		}
-		int a = 0;
-		while (true) {
-			if (list.get(0) == '(') {
-				list.remove(0);
-				a++;
-			} else if (list.get(0) == ')') {
-				list.remove(0);
-				a--;
-			}
-			if (a == 0) {
-				break;
-			}
+
+		String answer = "(" + solution(v) + ")";
+		for (int i = 1; i < u.length() - 1; i++) {
+			if (u.charAt(i) == '(') {
+				answer += ")";
+			} else
+				answer += "(";
 		}
-		for(char c :list) {
-			answer+=c;
-		}
+
 		return answer;
+	}
+
+	static boolean isCorrect(String str) {
+		boolean ret = true;
+		int left = 0, right = 0;
+		Stack<Character> mystack = new Stack<Character>();
+
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == '(') {
+				left++;
+				mystack.push('(');
+			} else {
+				right++;
+				if (mystack.isEmpty())
+					ret = false;
+				else
+					mystack.pop();
+			}
+			if (left == right) {
+				pos = i + 1;
+				return ret;
+			}
+		}
+		return true;
 	}
 }
