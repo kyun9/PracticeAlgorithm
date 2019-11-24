@@ -1,4 +1,4 @@
-package StudyAlgorithm;
+package StudyAlgorithm_P;
 
 public class p2018winter_coding3 {
 	static int cnt;

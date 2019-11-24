@@ -1,4 +1,4 @@
-package StudyAlgorithm;
+package StudyAlgorithm_P;
 
 import java.util.ArrayList;
 

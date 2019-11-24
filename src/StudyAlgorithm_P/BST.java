@@ -1,4 +1,4 @@
-package StudyAlgorithm;
+package StudyAlgorithm_P;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -37,7 +37,7 @@ class BinarySerachTree {
 						break;
 					}
 				} else if (a.val == val) {
-					System.out.println("Á¸Àç");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½");
 					break;
 				} else {
 					if (a.right != null) {
@@ -107,7 +107,7 @@ class BinarySerachTree {
 		printLevelOrder(this.root);
 	}
 
-//	ÁßÀ§ ¼øÈ¸(Inorder):(left, root, right)
+//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸(Inorder):(left, root, right)
 	private void printInOrder(Node current) {
 		if (current != null) {
 			printInOrder(current.left);
@@ -116,7 +116,7 @@ class BinarySerachTree {
 		}
 	}
 
-//	ÀüÀ§ ¼øÈ¸(preorder):(root, left, right)
+//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸(preorder):(root, left, right)
 	private void printPreOrder(Node current) {
 		if (current != null) {
 			System.out.print(current.val + " ");
@@ -125,7 +125,7 @@ class BinarySerachTree {
 		}
 	}
 
-//	ÈÄÀ§ ¼øÈ¸(postorder):(left, right, root)
+//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸(postorder):(left, right, root)
 	private void printPostOrder(Node current) {
 		if (current != null) {
 			printPostOrder(current.left);
@@ -135,7 +135,7 @@ class BinarySerachTree {
 	}
 
 	private void printLevelOrder(Node current) {
-		// (5)¹ø ±¸Çö
+		// (5)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 }
 

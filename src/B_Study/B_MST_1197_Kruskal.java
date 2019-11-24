@@ -3,7 +3,7 @@ package B_Study;
 import java.io.*;
 import java.util.*;
 
-import StudyAlgorithm.*;
+import StudyAlgorithm_P.*;
 
 class a implements Comparable<a> {
 	int start;
