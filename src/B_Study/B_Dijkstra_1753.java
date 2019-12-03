@@ -17,7 +17,7 @@ class Edge{
 	}
 }
 
-public class B_dijkstra_1753 {
+public class B_Dijkstra_1753 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
