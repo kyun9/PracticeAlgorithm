@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 
+
+// 시간 초과
 public class S_3752_self {
 	static HashSet<Integer> hs;
 
