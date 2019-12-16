@@ -20,7 +20,7 @@ class Move {
 	}
 }
 
-public class S_4408 {
+public class S_4408_self {
 	static int[][] map = new int[3][200];
 	static boolean[] visited;
 	static boolean check;
