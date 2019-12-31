@@ -2,20 +2,55 @@ package B_Study;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-
 //다시 풀어보기
 //크루스칼 알고리즘으로 풀어보기
+class Pair5 {
+	int x;
+	int y;
+
+	Pair5(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+class Rel {
+	int x;
+	int y;
+	int dic;
+
+	Rel(int x, int y, int dic) {
+		this.x = x;
+		this.y = y;
+		this.dic = dic;
+	}
+}
+
+class Node {
+	int start;
+	int end;
+	int weight;
+
+	Node(int start, int end,int weight) {
+		this.start = start;
+		this.end= end;
+		this.weight = weight;
+	}
+}
+
 public class B_17472 {
-	static int N, M, result;
+	static int N, M;
 	static int[][] map;
 	static int[][] group;
-	static boolean[] visited;
-	static ArrayList<Pair3>[] list;
-	static final int[] dx = { 0, 0, 1, -1 };
-	static final int[] dy = { -1, 1, 0, 0 };
+	static int[] dx = { -1, 0, 0, 1 };
+	static int[] dy = { 0, -1, 1, 0 };
+	static ArrayList<Pair5>[] list;
+	static ArrayList<Rel>[] relate;
+	static PriorityQueue<Node> pq;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -24,6 +59,14 @@ public class B_17472 {
 
 		map = new int[N][M];
 		group = new int[N][M];
+		list = new ArrayList[7];
+		relate = new ArrayList[7];
+		pq = new PriorityQueue<>();
+
+		for (int i = 0; i < list.length; i++) {
+			list[i] = new ArrayList<>();
+			relate[i] = new ArrayList<>();
+		}
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
@@ -32,21 +75,24 @@ public class B_17472 {
 		}
 
 		int cnt = 0;
+		Queue<Pair5> q = new LinkedList<>();
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
 				if (map[i][j] == 1 && group[i][j] == 0) {
-					Queue<Pair3> qu = new LinkedList<>();
-					group[i][j] = ++cnt;
-					qu.add(new Pair3(i, j));
-					while (!qu.isEmpty()) {
-						Pair3 p = qu.remove();
-						for (int k = 0; k < 4; k++) {
-							int x = p.x + dx[k];
-							int y = p.y + dy[k];
+					cnt += 1;
+					q.add(new Pair5(i, j));
+					group[i][j] = cnt;
+					list[cnt].add(new Pair5(i, j));
+					while (!q.isEmpty()) {
+						Pair5 p = q.remove();
+						for (int a = 0; a < 4; a++) {
+							int x = p.x + dx[a];
+							int y = p.y + dy[a];
 							if (0 <= x && x < N && 0 <= y && y < M) {
 								if (map[x][y] == 1 && group[x][y] == 0) {
-									qu.add(new Pair3(x, y));
 									group[x][y] = cnt;
+									q.add(new Pair5(x, y));
+									list[cnt].add(new Pair5(x, y));
 								}
 							}
 						}
@@ -55,116 +101,124 @@ public class B_17472 {
 			}
 		}
 
-		visited = new boolean[cnt + 1];
-		list = new ArrayList[cnt + 1];
 		for (int i = 0; i < list.length; i++) {
-			list[i] = new ArrayList<>();
+			for (int j = 0; j < list[i].size(); j++) {
+				findDic(i, j);
+			}
 		}
 
-		System.out.println(cnt);
+		for (int i = 0; i < relate.length; i++) {
+			for (int j = 0; j < relate[i].size(); j++) {
+				cofirmEdge(i, j);
+			}
+		}
+
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
-				if (group[i][j] != 0) {
-					list[group[i][j]].add(new Pair3(i, j));
-					Queue<Pair3> qu = new LinkedList<>();
-					qu.add(new Pair3(i, j));
-					bfs(qu);
+				System.out.print(group[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		System.out.println("relate");
+		for (int i = 0; i < relate.length; i++) {
+			for (int j = 0; j < relate[i].size(); j++) {
+				System.out.print(relate[i].get(j).x + " " + relate[i].get(j).y + "  " + relate[i].get(j).dic);
+				System.out.println();
+			}
+			System.out.println();
+		}
+		System.out.println("node");
+		for (int i = 0; i < pq.size(); i++) {
+				System.out.print(pq);
+				System.out.println();
+			}
+			System.out.println();
+		}
+
+	
+
+	static void findDic(int a, int b) {
+		for (int i = 0; i < 4; i++) {
+			int x = list[a].get(b).x + dx[i];
+			int y = list[a].get(b).y + dy[i];
+			if (0 <= x && x < N && 0 <= y && y < M) {
+				if (map[x][y] == 0) {
+					relate[a].add(new Rel(list[a].get(b).x, list[a].get(b).y, i));
 				}
 			}
 		}
-
-		dfs(1,0);
-		
-		System.out.println(result);
 	}
 
-	static void bfs(Queue<Pair3> qu) {
-		while (!qu.isEmpty()) {
-			Pair3 p = qu.remove();
-			for (int i = 0; i < 4; i++) {
-				int x = p.x + dx[i];
-				int y = p.y + dy[i];
-				if (0 <= x && x < N && 0 <= y && y < M) {
-					if (group[x][y] == group[p.x][p.y]) {
-						list[group[x][y]].add(new Pair3(x, y));
-						qu.add(new Pair3(x, y));
+	static void cofirmEdge(int a, int b) {
+		Rel r = relate[a].get(b);
+		System.out.println("a " + a + " b " + b + " relate[a].get(b).dic " + relate[a].get(b).dic);
+		int tmp = 0;
+		if (r.dic == 0) {
+			for (int i = r.x - 1; i >= 0; i--) {
+				if (group[i][r.y] != 0) {
+					if (tmp <= 1) {
+						break;
 					}
+//					if(!containNode(group[r.x][r.y], i, r.y, tmp)) {
+					pq.add(new Node(group[r.x][r.y],group[i][r.y], tmp));
+					break;
+//					}
 				}
+				tmp++;
 			}
-		}
-	}
-
-	static void dfs(int start, int depth) {
-		if(depth==list.length) {
-			return;
-		}
-		visited[start]= true;
-		for (int k = 0; k < list[start].size(); k++) {
-			Pair3 p = list[start].get(k);
-			for (int i = 0; i < 4; i++) {
-				int x = p.x + dx[i];
-				int y = p.y + dy[i];
-				if (0 <= x && x < N && 0 <= y && y < M) {
-					if (group[x][y] == 0) {
-						int[] val = goLine(x, y, i);
-						if (val[2] >= 2) {
-							if(!visited[group[val[0]][val[1]]]) {
-								result+=val[2];
-								dfs(group[val[0]][val[1]], depth+1);
-							}
-						}
+		} else if (r.dic == 1) {
+			for (int i = r.y - 1; i >= 0; i--) {
+				if (group[r.x][i] != 0) {
+					if (tmp <= 1) {
+						break;
 					}
+//					if(!containNode(group[r.x][r.y], r.x,i,tmp)) {
+						pq.add(new Node(group[r.x][r.y],group[r.x][i], tmp));
+					break;
+//					}
 				}
+				tmp++;
+			}
+		} else if (r.dic == 2) {
+			for (int i = r.y + 1; i < M; i++) {
+				if (group[r.x][i] != 0) {
+					if (tmp <= 1) {
+						break;
+					}
+//					if(!containNode(group[r.x][r.y],r.x,i,tmp)) {
+						pq.add(new Node(group[r.x][r.y],group[r.x][i], tmp));
+					break;
+//					}
+				}
+				tmp++;
+			}
+		} else {
+			for (int i = r.x + 1; i < N; i++) {
+				if (group[i][r.y] != 0) {
+					if (tmp <= 1) {
+						break;
+					}
+//					if(!containNode(group[r.x][r.y], i,r.y,tmp)) {
+						pq.add(new Node(group[r.x][r.y],group[i][r.y], tmp));
+						break;
+//					}
+				}
+				tmp++;
 			}
 		}
 	}
+//	static boolean containNode(int start, int x, int y, int weight) {
+//
+//		for(int i=0;i<pq.size();i++) {
+//			if(pq.==group[x][y]) {
+//				if(node[start].get(i).weight==weight) {
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//		
+//	}
 
-	static int[] goLine(int x, int y, int dic) {
-		int[] arr = new int[3];
-		int a=0;
-		int b=0;
-		int cnt = 0;
-		if (dic == 0) {
-			for (int i = y; i >= 0; i--) {
-				if (map[x][i] == 1) {
-					cnt = y-i-1;
-					a=x;
-					b=i;
-					break;
-				}
-			}
-		} else if (dic == 1) {
-			for (int i = y; i < M; i++) {
-				if (map[x][i] == 1) {
-					cnt =i-y-1;
-					a=x;
-					b=i;
-					break;
-				}
-			}
-		} else if (dic == 2) {
-			for (int i = x; i < N; i++) {
-				if (map[i][y] == 1) {
-					cnt= i-x-1;
-					a=i;
-					b=y;
-					break;
-				}
-			}
-		} else if (dic == 3) {
-			for (int i = x; i >= 0; i--) {
-				if (map[i][y] == 1) {
-					cnt =x-i-1;
-					a=i;
-					b=y;
-					break;
-				}
-			}
-		}
-		
-		arr[0] =a;
-		arr[1]=b;
-		arr[2]= cnt;
-		return arr;
-	}
 }
