@@ -3,7 +3,7 @@ package Alone;
 public class Permutation {
 
    public static void main(String[] args) {
-      int[] arr = { 1, 2, 3};
+      int[] arr = { 1, 2, 3,4};
       
       for(int i=1; i<arr.length+1;i++) {   // 전부가 아니 r의 갯수만큼 
          int[] result=new int[i];

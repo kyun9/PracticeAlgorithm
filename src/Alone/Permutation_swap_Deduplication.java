@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 
 
-//ArrayList°¡ ¾Æ´Ñ swapÀÌ¶ó´Â ¸Þ¼Òµå¸¦ ÀÌ¿ëÇÏ¿© 
-// Àç±ÍÇÏ¸é °ªÀ» ±¸ÇØÁØ´Ù.
+//ArrayListï¿½ï¿½ ï¿½Æ´ï¿½ swapï¿½Ì¶ï¿½ï¿½ ï¿½Þ¼Òµå¸¦ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ 
+// ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 
 
 
 class Permutation_4 {
 
-	private int n; // nPrÀÇ n
-	private int r; // nPrÀÇ r
+	private int n; // nPrï¿½ï¿½ n
+	private int r; // nPrï¿½ï¿½ r
 	private int[] res;
 
-	// ÃÊ±âÈ­
+	// ï¿½Ê±ï¿½È­
 	public Permutation_4(int n, int r) {
 		this.n = n;
 		this.r = r;
@@ -30,17 +30,17 @@ class Permutation_4 {
 
 	public void perm(int[] arr, int depth) {
 
-		// depth°¡ 0ºÎÅÍ ½ÃÀÛÇßÀ» °æ¿ì depth == r¿¡¼­ ¸®ÅÏ
+		// depthï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ depth == rï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (depth == r) {
 			System.out.println(Arrays.toString(res));
 			return;
 		}
 
 		for (int i = depth; i < n; i++) {
-			swap(arr, depth, i); // ½º¿Ò
-			res[depth] = arr[depth]; // ¼±ÅÃµÈ ¿ø¼Ò ÀúÀå
-			perm(arr, depth + 1); // Àç±ÍÈ£Ãâ
-			swap(arr, depth, i); // º¹¿ø
+			swap(arr, depth, i); // ï¿½ï¿½ï¿½ï¿½
+			res[depth] = arr[depth]; // ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			perm(arr, depth + 1); // ï¿½ï¿½ï¿½È£ï¿½ï¿½
+			swap(arr, depth, i); // ï¿½ï¿½ï¿½ï¿½
 		}
 	}
 
