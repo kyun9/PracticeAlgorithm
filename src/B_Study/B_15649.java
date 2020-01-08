@@ -21,6 +21,7 @@ public class B_15649 {
 				System.out.print(nums[i]+" ");
 			}
 			System.out.println();
+			return;
 		}
 		for (int i = 1; i <= n; i++) {
 			if (check[i])
