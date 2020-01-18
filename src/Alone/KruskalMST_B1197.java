@@ -41,7 +41,8 @@ public class KruskalMST_B1197 {
 		for (int i = 1; i < parent.length; i++) {
 			parent[i] = i;
 		}
-
+		
+		
 		pq = new PriorityQueue<a>();
 		for (int i = 0; i < e; i++) {
 			String[] temp = br.readLine().split(" ");
@@ -53,6 +54,11 @@ public class KruskalMST_B1197 {
 			if (!isSameParent(value.start, value.end)) {
 				result += value.weight;
 				union(value.start, value.end);
+				System.out.println("i : "+i);
+				for(int a :  parent) {
+					System.out.print(a+" ");
+				}
+				System.out.println();
 			}
 
 		}
