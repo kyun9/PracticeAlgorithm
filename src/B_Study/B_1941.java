@@ -3,6 +3,8 @@ package B_Study;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+
+// 어려움 다시 풀어보기
 public class B_1941 {
 	static int ans, cnt;
 	static int[] dx = { -1, 0, 1, 0 };
@@ -20,6 +22,7 @@ public class B_1941 {
 		}
 
 		for (int i = 0; i < 25; i++) {
+			//visited를  25로 잡은 이유가 dfs이용한 백트래킹으로는 십자가 같은 모양의 연결은 찾지 못함
 			visited = new boolean[25];
 			map = new boolean[5][5];
 			dfs(i, 1, 0);
@@ -27,6 +30,7 @@ public class B_1941 {
 		System.out.println(ans);
 	}
 
+	//25 boolean 배열을 통하여 랜덤하게 7개를 뽑아냄
 	public static void dfs(int n, int cnt, int s) {
 		if (array[n / 5][n % 5] == 'S') {
 			++s;
@@ -51,6 +55,7 @@ public class B_1941 {
 		map[n / 5][n % 5] = false;
 	}
 
+	//찾아 낸걸 visited 이차원배열에  다시 표시하고 전부 연결된 요소인지 확인 하기 dfs다시 실행
 	public static void find() {
 		for (int i = 0; i < 25; i++) {
 			if (visited[i]) {
@@ -66,6 +71,7 @@ public class B_1941 {
 		}
 	}
 
+	// true/false를 통하여 연결 여부 확인후 ans 증가
 	public static void isComponent(int y, int x, boolean[][] checked) {
 		if (7 == cnt) {
 			++ans;
