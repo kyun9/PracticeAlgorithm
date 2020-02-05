@@ -125,7 +125,7 @@ public class B_4991 {
 			check = new boolean[list.size()];
 			check[0] = true;
 			dfs(0, 0, 0);
-			if (result == Integer.MAX_VALUE) {
+			if (result == Integer.MAX_VALUE||result<0) {
 				System.out.println(-1);
 			} else {
 				System.out.println(result);
