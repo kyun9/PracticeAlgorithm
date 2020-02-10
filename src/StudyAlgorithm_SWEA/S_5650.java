@@ -1,325 +1,150 @@
 package StudyAlgorithm_SWEA;
 
+import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+ 
 public class S_5650 {
-	static int T, N, result, sum;
-	static int[][] map;
-	static ArrayList<Pair33> list;
-	static ArrayList<Pair33> wormList;
-	static boolean flag, check;
-	static Pair33 firstPair;
-	// 북 동 남 서
-	static int[] dx = { -1, 0, 1, 0 };
-	static int[] dy = { 0, 1, 0, -1 };
-
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//		T = Integer.parseInt(br.readLine().trim());
-//		for (int test = 1; test <= T; test++) {
-		N = Integer.parseInt(br.readLine().trim());
-		map = new int[N][N];
-		StringTokenizer st;
-		list = new ArrayList<>();
-		wormList = new ArrayList<>();
-		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
-			for (int j = 0; j < N; j++) {
-				map[i][j] = Integer.parseInt(st.nextToken());
-				if (map[i][j] == 0) {
-					list.add(new Pair33(i, j, 0));
-				} else if (5 < map[i][j] && map[i][j] <= 10) {
-					wormList.add(new Pair33(i, j, 0));
-				}
-			}
-		}
-
-		result = 0;
-		for (int i = 0; i < list.size(); i++) {
-			for (int j = 0; j < 4; j++) {
-				sum = 0;
-				flag = false;
-				check=false;
-				Pair33 p = list.get(i);
-				p.d = j;
-				
-				firstPair = new Pair33(p.x, p.y, p.d);
-				System.out.println("x : " + p.x + " y : " + p.y + " j :  " + p.d);
-				movePin(p);
-			}
-		}
-		System.out.println("@@@@@@@@@@@@@@@" + result);
-//			System.out.println("#"+test+" "+);
-//		}
-
-	}
-
-	static void movePin(Pair33 pair) {
-//		System.out.println("pair.x : "+pair.x+" pair.y : "+ pair.y+" pair.d : "+ pair.d);
-		if (flag) {
-			System.out.println("sum : " + sum);
-			result = Math.max(result, sum);
-			return;
-		}
-		// 북 동 남 서
-		if (pair.d == 0) {
-			pair.x += dx[0];
-			pair.y += dy[0];
-			if (firstPair.x == pair.x && firstPair.y == pair.y&&check) {
-				System.out.println(pair.x + " "+ pair.y);
-				System.out.println("sum1 : " + sum);
-				result = Math.max(result, sum);
-				return;
-			}
-			if (!checkLine(pair.x, pair.y)) {
-				sum++;
-				pair.x -= dx[0];
-				pair.y -= dy[0];
-				pair.d = 2;
-				check = false;
-				movePin(pair);
-			} else {
-				if (map[pair.x][pair.y] == 0) {
-					check = true;
-					movePin(pair);
-				} else if (1 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 5) {
-					System.out.println(222222222);
-					sum++;
-					int tmp = confirmBlock(map[pair.x][pair.y], pair.d);
-					pair.d = tmp;
-					if(!check) {
-						System.out.println("sum : " + sum);
-						result = Math.max(result, sum);
-						return;
-					}
-					movePin(pair);
-				} else if (6 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 10) {
-					int[] arr = checkWorm(pair.x, pair.y);
-					pair.x = arr[0];
-					pair.y = arr[1];
-					movePin(pair);
-				} else if (map[pair.x][pair.y] == -1) {
-					flag = true;
-					movePin(pair);
-				}
-			}
-		} else if (pair.d == 1) {
-			pair.x += dx[1];
-			pair.y += dy[1];
-			if (firstPair.x == pair.x && firstPair.y == pair.y) {
-				System.out.println("sum : " + sum);
-				result = Math.max(result, sum);
-				return;
-			}
-			if (!checkLine(pair.x, pair.y)) {
-				sum++;
-				pair.x -= dx[0];
-				pair.y -= dy[0];
-				pair.d = 3;
-				check = false;
-				movePin(pair);
-			} else {
-				if (map[pair.x][pair.y] == 0) {
-					check = true;
-					movePin(pair);
-				} else if (1 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 5) {
-					int tmp = confirmBlock(map[pair.x][pair.y], pair.d);
-					pair.d = tmp;
-					if(!check) {
-						System.out.println("sum : " + sum);
-						result = Math.max(result, sum);
-						return;
-					}
-					movePin(pair);
-				} else if (6 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 10) {
-					int[] arr = checkWorm(pair.x, pair.y);
-					pair.x = arr[0];
-					pair.y = arr[1];
-					movePin(pair);
-				} else if (map[pair.x][pair.y] == -1) {
-					flag = true;
-					movePin(pair);
-				}
-			}
-		} else if (pair.d == 2) {
-			pair.x += dx[2];
-			pair.y += dy[2];
-			if (firstPair.x == pair.x && firstPair.y == pair.y) {
-				System.out.println("sum : " + sum);
-				result = Math.max(result, sum);
-				return;
-			}
-			if (!checkLine(pair.x, pair.y)) {
-				sum++;
-				pair.x -= dx[0];
-				pair.y -= dy[0];
-				pair.d = 0;
-				check = false;
-				movePin(pair);
-			} else {
-				if (map[pair.x][pair.y] == 0) {
-					check = true;
-					movePin(pair);
-				} else if (1 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 5) {
-					int tmp = confirmBlock(map[pair.x][pair.y], pair.d);
-					pair.d = tmp;
-					if(!check) {
-						System.out.println("sum : " + sum);
-						result = Math.max(result, sum);
-						return;
-					}
-					movePin(pair);
-				} else if (6 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 10) {
-					int[] arr = checkWorm(pair.x, pair.y);
-					pair.x = arr[0];
-					pair.y = arr[1];
-					movePin(pair);
-				} else if (map[pair.x][pair.y] == -1) {
-					flag = true;
-					movePin(pair);
-				}
-			}
-		} else if (pair.d == 3) {
-			pair.x += dx[3];
-			pair.y += dy[3];
-			if (firstPair.x == pair.x && firstPair.y == pair.y) {
-				System.out.println("sum : " + sum);
-				result = Math.max(result, sum);
-				return;
-			}
-			if (!checkLine(pair.x, pair.y)) {
-				sum++;
-				pair.x -= dx[0];
-				pair.y -= dy[0];
-				pair.d = 1;
-				check = false;
-				movePin(pair);
-			} else {
-				if (map[pair.x][pair.y] == 0) {
-					check = true;
-					movePin(pair);
-				} else if (1 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 5) {
-					int tmp = confirmBlock(map[pair.x][pair.y], pair.d);
-					pair.d = tmp;
-					if(!check) {
-						System.out.println("sum : " + sum);
-						result = Math.max(result, sum);
-						return;
-					}
-					movePin(pair);
-				} else if (6 <= map[pair.x][pair.y] && map[pair.x][pair.y] <= 10) {
-					int[] arr = checkWorm(pair.x, pair.y);
-					pair.x = arr[0];
-					pair.y = arr[1];
-					movePin(pair);
-				} else if (map[pair.x][pair.y] == -1) {
-					flag = true;
-					movePin(pair);
-				}
-			}
-		}
-
-	}
-
-	static int[] checkWorm(int x, int y) {
-		int[] temp = new int[2];
-		for (int i = 0; i < wormList.size(); i++) {
-			int wx = wormList.get(i).x;
-			int wy = wormList.get(i).y;
-			if (map[wx][wy] == map[x][y]) {
-				if (wx == x && wy == y) {
-				} else {
-					temp[0] = wx;
-					temp[1] = wy;
-					break;
-				}
-			}
-		}
-		return temp;
-	}
-
-	static boolean checkLine(int x, int y) {
-		if (0 <= x && x < N && 0 <= y && y < N) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	static int confirmBlock(int num, int d) {
-		int dic = 0;
-		switch (num) {
-		case 1:
-			if (d == 0) {
-				dic = 2;
-			} else if (d == 1) {
-				dic = 3;
-			} else if (d == 2) {
-				dic = 1;
-			} else if (d == 3) {
-				dic = 0;
-			}
-			break;
-		case 2:
-			if (d == 0) {
-				dic = 1;
-			} else if (d == 1) {
-				dic = 3;
-			} else if (d == 2) {
-				dic = 0;
-			} else if (d == 3) {
-				dic = 2;
-			}
-			break;
-		case 3:
-			if (d == 0) {
-				dic = 3;
-			} else if (d == 1) {
-				dic = 2;
-			} else if (d == 2) {
-				dic = 0;
-			} else if (d == 3) {
-				dic = 1;
-			}
-			break;
-		case 4:
-			if (d == 0) {
-				dic = 2;
-			} else if (d == 1) {
-				dic = 0;
-			} else if (d == 2) {
-				dic = 3;
-			} else if (d == 3) {
-				dic = 1;
-			}
-			break;
-		case 5:
-			if (d == 0) {
-				dic = 2;
-			} else if (d == 1) {
-				dic = 3;
-			} else if (d == 2) {
-				dic = 0;
-			} else if (d == 3) {
-				dic = 1;
-			}
-			break;
-		}
-		return dic;
-	}
-}
-
-class Pair33 {
-	int x;
-	int y;
-	int d;
-
-	Pair33(int x, int y, int d) {
-		this.x = x;
-		this.y = y;
-		this.d = d;
-	}
+ 
+    static int T,N;
+    static int[][] map;
+    static int []dx = {0,0,1,-1};
+    static int []dy = {1,-1,0,0};
+    static int max;
+    static Point[][] warm;
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        T = Integer.parseInt(br.readLine());
+        int t = 1;
+        
+        while(T-- >0) {
+            
+            N = Integer.parseInt(br.readLine());
+            
+            map = new int[N+2][N+2];
+            max = Integer.MIN_VALUE;
+            warm = new Point[2][5];
+            
+            for (int i = 0; i < N+2; i++) {
+                map[0][i] = map[N+1][i] = map[i][0] = map[i][N+1] = 5;
+            }
+            
+            for (int i = 1; i <= N; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                for (int j = 1; j <= N; j++) {
+                    map[i][j] = Integer.parseInt(st.nextToken());
+                    
+                    if(map[i][j] >= 6) {
+                        if(warm[0][map[i][j]-6] != null) {
+                            warm[1][map[i][j]-6] = new Point(i, j);
+                        }
+                        else {
+                            warm[0][map[i][j]-6] = new Point(i, j);
+                        }
+                    }
+                }
+            }
+            
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
+                    if(map[i][j] != 0) continue;
+                    for (int k = 0; k < 4; k++) {
+                        solve(i,j,k);
+                    }
+                }
+            }
+            System.out.printf("#%d %d%n",t++,max);
+        }
+    }
+    
+    static void solve(int sx, int sy, int dir) {
+        
+        int tx = sx;
+        int ty = sy;
+        int cnt = 0;
+        
+        while(true) {
+            int nx = tx + dx[dir];
+            int ny = ty + dy[dir];
+            
+            if(map[nx][ny] == -1 || (nx == sx && ny == sy))
+                break;
+            
+            if( map[nx][ny]>= 6 ) {    // warmhole
+                Point p = move(map[nx][ny],nx,ny);
+                tx = p.x;
+                ty = p.y;
+                continue; 
+            }
+            else if( map[nx][ny] >= 1 ) { // block 
+                dir = change(map[nx][ny],dir);
+                cnt++;
+            }
+            
+            tx = nx;
+            ty = ny;
+        }
+        max = Math.max(max, cnt);
+    }
+    
+    static Point move(int warmhole, int x, int y) {
+        Point f = warm[0][warmhole-6];
+        Point s = warm[1][warmhole-6];
+        
+        if(f.x == x && f.y == y) {
+            return s;
+        }
+        return f;
+    }
+    
+    static int change(int block, int d) {
+        switch(block) {
+        case 1:
+            switch(d) {
+            case 0: d = 1; break;
+            case 1: d = 3; break;
+            case 2: d = 0; break;
+            case 3: d = 2; break;
+            }
+            break;
+        case 2:
+            switch(d) {
+            case 0: d = 1; break;
+            case 1: d = 2; break;
+            case 2: d = 3; break;
+            case 3: d = 0; break;
+            }
+            break;
+        case 3:
+            switch(d) {
+            case 0: d = 2; break;
+            case 1: d = 0; break;
+            case 2: d = 3; break;
+            case 3: d = 1; break;
+            }
+            break;
+        case 4:
+            switch(d) {
+            case 0: d = 3; break;
+            case 1: d = 0; break;
+            case 2: d = 1; break;
+            case 3: d = 2; break;
+            }
+            break;
+        case 5:
+            switch(d) {
+            case 0: d = 1; break;
+            case 1: d = 0; break;
+            case 2: d = 3; break;
+            case 3: d = 2; break;
+            }
+            break;
+        }
+        return d;
+    }
+    
 }
