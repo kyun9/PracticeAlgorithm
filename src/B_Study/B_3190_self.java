@@ -29,7 +29,7 @@ class Move {
 	}
 }
 
-public class B_3190 {
+public class B_3190_self {
 	static int[] dx = { -1, 0, 1, 0 };
 	static int[] dy = { 0, 1, 0, -1 };
 	static int[][] map;
