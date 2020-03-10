@@ -16,7 +16,6 @@ import java.util.StringTokenizer;
 public class B_16234 {
 	static int N, L, R, sum, result,c;
 	static int[][] map;
-	static int[][] groupMap;
 	static boolean[][] visited;
 	static int[] dx = { 0, 1, 0, -1 };
 	static int[] dy = { 1, 0, -1, 0 };
@@ -43,7 +42,6 @@ public class B_16234 {
 		while (true) {
 			result++;
 			int cnt = 1;
-			groupMap = new int[N][N];
 			visited = new boolean[N][N];
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
@@ -75,7 +73,6 @@ public class B_16234 {
 		list.add(new Pair(x,y));
 		sum += map[x][y];
 		visited[x][y] = true;
-		groupMap[x][y] = cnt;
 		for (int i = 0; i < 4; i++) {
 			int px = x + dx[i];
 			int py = y + dy[i];
