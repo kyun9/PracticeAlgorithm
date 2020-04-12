@@ -24,6 +24,7 @@ public class B_1654 {
 		while (max >= min) {
 			mid = (max + min) / 2;
 			sum = 0;
+			System.out.println("max : "+ max +" min : "+ min + "  mid : "+ mid);
 			for (int i = 0; i < K; i++) {
 				sum += arr[i] / mid;
 			}
