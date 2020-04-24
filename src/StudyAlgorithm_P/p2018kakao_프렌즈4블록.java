@@ -2,7 +2,7 @@ package StudyAlgorithm_P;
 
 import java.util.ArrayList;
 
-public class p2018kakao {
+public class p2018kakao_프렌즈4블록 {
 
 	public static void main(String[] args) {
 		int m = 4;
