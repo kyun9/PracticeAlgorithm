@@ -1,8 +1,8 @@
-package line2020;
+package coding_2020;
 
 import java.util.Stack;
 
-public class a {
+public class a_line {
 
 	public static void main(String[] args) {
 		System.out.println(solution("Hello, world!"));

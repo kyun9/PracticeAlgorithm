@@ -1,7 +1,7 @@
-package line2020;
+package coding_2020;
 
 
-public class b {
+public class b_line {
 	static String s_answer;
 	static String[] s_sheets;
 	static int size,result;

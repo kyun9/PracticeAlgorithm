@@ -1,8 +1,8 @@
-package line2020;
+package coding_2020;
 
 import java.util.ArrayList;
 
-public class c {
+public class c_line {
 	static int result;
 	public static void main(String[] args) {
 		System.out.println(solution("111011110011111011111100011111", 3));

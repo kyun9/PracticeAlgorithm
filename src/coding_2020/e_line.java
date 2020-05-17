@@ -1,4 +1,4 @@
-package line2020;
+package coding_2020;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,7 @@ class Doc implements Comparable<Doc>{
 		}
 	}
 }
-public class e {
+public class e_line {
 
 	public static void main(String[] args) {
 		String[][] dataSource = { { "doc1", "t1", "t2", "t3" }, { "doc2", "t0", "t2", "t3" },

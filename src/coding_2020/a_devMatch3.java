@@ -1,4 +1,4 @@
-package line2020;
+package coding_2020;
 
 public class a_devMatch3 {
 	static int result;
