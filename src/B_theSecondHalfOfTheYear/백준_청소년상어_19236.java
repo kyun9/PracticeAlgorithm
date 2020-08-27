@@ -66,9 +66,9 @@ public class 백준_청소년상어_19236 {
 			copyFishes[i] = fishes[i];
 		}
 
-		fishMove();		//물고기 이동
+		fishMove(); // 물고기 이동
 
-		for (int i = 1; i <= 3; i++) {			//4x4임으로 범위줌
+		for (int i = 1; i <= 3; i++) { // 4x4임으로 범위줌
 
 			int nr = r + (dir[direction][0] * i);
 			int nc = c + (dir[direction][1] * i);
@@ -82,7 +82,7 @@ public class 백준_청소년상어_19236 {
 				int n = map[nr][nc];
 				map[nr][nc] = -1;
 				isLive[n] = false;
-				eatFish(nr, nc, fishes[n].d, sum + n, cnt + 1);	//백트래킹부분
+				eatFish(nr, nc, fishes[n].d, sum + n, cnt + 1); // 백트래킹부분
 				isLive[n] = true;
 				map[nr][nc] = n;
 				map[r][c] = -1;
@@ -124,11 +124,11 @@ public class 백준_청소년상어_19236 {
 				ny = cur.y + dir[nd][1];
 
 				if (isInside(nx, ny)) {
-					if (map[nx][ny] == -1) {	//상어일때
-						nd = changeDir[nd];		//방향바꾸기
+					if (map[nx][ny] == -1) { // 상어일때
+						nd = changeDir[nd]; // 방향바꾸기
 						continue;
 					}
-					if (map[nx][ny] == 0 || map[nx][ny] != -1) {	//상어가 아닐때
+					if (map[nx][ny] == 0 || map[nx][ny] != -1) { // 상어가 아닐때
 						flag = true;
 						break;
 					}
