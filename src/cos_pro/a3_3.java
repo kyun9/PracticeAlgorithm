@@ -1,6 +1,6 @@
 package cos_pro;
 
-public class c3_3 {
+public class a3_3 {
 
 	public static int solution(String[] bishops) {
 		int answer = 0;

@@ -1,6 +1,6 @@
 package cos_pro;
 
-public class c3_4 {
+public class a3_4 {
 
 	public static int solution(String s1, String s2) {
 		// 여기에 코드를 작성해주세요.
