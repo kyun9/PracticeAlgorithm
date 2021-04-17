@@ -1,6 +1,7 @@
 package p2021_1;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -25,6 +26,8 @@ public class 마법사상어와파이어볼 {
 	static int[] dy = { 0, 1, 1, 1, 0, -1, -1, -1 };
 
 	public static void main(String[] args) throws Exception {
+		System.setIn(new FileInputStream("C:\\Users\\82103\\Desktop\\input.txt"));
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
