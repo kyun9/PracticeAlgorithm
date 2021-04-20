@@ -8,8 +8,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-import p2021_1.아기상어.Node2;
-
 public class 아기상어_2 {
 	static class Fish2 implements Comparable<Fish2> {
 		int x;
@@ -24,11 +22,17 @@ public class 아기상어_2 {
 
 		@Override
 		public int compareTo(Fish2 f) {
-			if (this.x < f.x) {
+			if (this.cnt < f.cnt) {
 				return -1;
-			} else if (this.x == f.x) {
-				if (this.y < f.y) {
+			} else if (this.cnt == f.cnt) {
+				if (this.x < f.x) {
 					return -1;
+				} else if (this.x == f.x) {
+					if (this.y < f.y) {
+						return -1;
+					} else {
+						return 1;
+					}
 				} else {
 					return 1;
 				}
@@ -78,10 +82,10 @@ public class 아기상어_2 {
 				return time;
 			}
 
-			for (Fish2 f : pq) {
-				System.out.println(f.x + " " + f.y + " " + f.cnt);
-			}
-			System.out.println();
+//			for (Fish2 f : pq) {
+//				System.out.println(f.x + " " + f.y + " " + f.cnt);
+//			}
+//			System.out.println();
 			Fish2 fish = pq.poll();
 			time += fish.cnt;
 			map[sharkX][sharkY] = 0;
@@ -105,15 +109,14 @@ public class 아기상어_2 {
 
 		Queue<Fish2> q = new LinkedList<>();
 		q.offer(new Fish2(sharkX, sharkY, 0));
-		
-		int dist = Integer.MAX_VALUE;
-/* 
- * dist를 매우 큰 값으로 설정한 뒤
 
-최초로 먹을 수 있는 물고기를 찾으면 dist 값을 갱신한다. 이 값은 BFS 탐색을 할 때, 해당 거리(dist) 만큼
-
-벗어나지 않도록 하기 위함이다.
-*/
+		/*
+		 * dist를 매우 큰 값으로 설정한 뒤
+		 * 
+		 * 최초로 먹을 수 있는 물고기를 찾으면 dist 값을 갱신한다. 이 값은 BFS 탐색을 할 때, 해당 거리(dist) 만큼
+		 * 
+		 * 벗어나지 않도록 하기 위함이다.
+		 */
 		while (!q.isEmpty()) {
 			Fish2 shark = q.poll();
 
@@ -122,9 +125,8 @@ public class 아기상어_2 {
 				int px = shark.x + dx[i];
 				int py = shark.y + dy[i];
 
-				if (isInside(px, py) && !visited[px][py] && cnt < dist) {
+				if (isInside(px, py) && !visited[px][py]) {
 					if (0 < map[px][py] && map[px][py] < sharkSize) {
-						dist = Math.min(dist, cnt + 1);								
 						pq.offer(new Fish2(px, py, shark.cnt + 1));
 						visited[px][py] = true;
 					} else if (map[px][py] == sharkSize) {
